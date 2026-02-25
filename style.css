@@ -1,0 +1,655 @@
+/* ============================================
+   ESTILO AMAZON - Manualidades Yusy
+   ============================================ */
+
+/* Variables de Estilo Amazon */
+:root {
+    --amazon-dark: #131921;
+    --amazon-light-dark: #232f3e;
+    --amazon-orange: #ff9900;
+    --amazon-yellow: #f7ca00;
+    --amazon-blue: #007185;
+    --amazon-white: #ffffff;
+    --amazon-gray-light: #f3f3f3;
+    --amazon-gray: #dddddd;
+    --amazon-text: #0f1111;
+    --amazon-text-light: #565959;
+    --amazon-star: #ffa41c;
+    --amazon-green: #007600;
+    --amazon-red: #cc1c39;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: 'Amazon Ember', 'Segoe UI', Arial, sans-serif;
+    background-color: var(--amazon-gray-light);
+    color: var(--amazon-text);
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+/* ============================================
+   BARRA DE NAVEGACIÓN TIPO AMAZON
+   ============================================ */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+    background: var(--amazon-dark);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.logo:hover {
+    border-color: white;
+}
+
+.logo span {
+    color: var(--amazon-yellow);
+}
+
+/* Buscador */
+.search-bar {
+    flex: 1;
+    max-width: 700px;
+    margin: 0 20px;
+    display: flex;
+    height: 40px;
+}
+
+.search-bar select {
+    background: #f3f3f3;
+    border: none;
+    border-radius: 3px 0 0 3px;
+    padding: 0 10px;
+    font-size: 12px;
+    cursor: pointer;
+    max-width: 60px;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    padding: 0 10px;
+    font-size: 15px;
+}
+
+.search-bar button {
+    background: var(--amazon-yellow);
+    border: none;
+    border-radius: 0 3px 3px 0;
+    width: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar button:hover {
+    background: var(--amazon-orange);
+}
+
+/* Menú derecho */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link:hover {
+    border-color: white;
+}
+
+.nav-link .small {
+    font-size: 10px;
+}
+
+.nav-link .big {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Carrito */
+.cart-icon {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.cart-icon:hover {
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.cart-icon i {
+    font-size: 28px;
+}
+
+.cart-icon #cart-count {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: var(--amazon-orange);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Menú inferior */
+.navbar-bottom {
+    background: var(--amazon-light-dark);
+    padding: 8px 20px;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar-bottom a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.navbar-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Links de navegación (legacy) */
+.nav-links {
+    display: none; /* Ocultamos el viejo nav */
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    height: 300px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('https://images.unsplash.com/photo-1528819622765-d6bcf132f793?auto=format&fit=crop&q=80') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--amazon-gray-light));
+}
+
+.hero-content {
+    background: rgba(0,0,0,0.6);
+    padding: 30px 50px;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background: var(--amazon-yellow);
+    color: var(--amazon-text);
+    padding: 8px 18px;
+    border: 1px solid var(--amazon-yellow);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: var(--amazon-orange);
+    border-color: var(--amazon-orange);
+}
+
+/* ============================================
+   SECCIÓN PRINCIPAL
+   ============================================ */
+.container {
+    padding: 20px;
+    max-width: 1500px;
+    margin: 0 auto;
+    position: relative;
+    top: -30px;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--amazon-text);
+}
+
+/* Grid de Productos Estilo Amazon */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 4px;
+    padding: 15px;
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+
+.product-card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-info h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--amazon-blue);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.product-info h3:hover {
+    color: var(--amazon-orange);
+}
+
+/* Sistema de Estrellas */
+.stars {
+    color: var(--amazon-star);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stars .empty {
+    color: var(--amazon-gray);
+}
+
+/* Precio estilo Amazon */
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--amazon-text);
+    margin-bottom: 8px;
+}
+
+.price sup {
+    font-size: 10px;
+    vertical-align: super;
+}
+
+/* Stock indicator */
+.stock {
+    font-size: 12px;
+    color: var(--amazon-green);
+    margin-bottom: 10px;
+}
+
+.stock.out-of-stock {
+    color: var(--amazon-red);
+}
+
+/* Botón agregar al carrito */
+.btn-add-cart {
+    width: 100%;
+    background: var(--amazon-yellow);
+    border: 1px solid var(--amazon-yellow);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: all 0.1s;
+}
+
+.btn-add-cart:hover {
+    background: var(--amazon-orange);
+    border-color: var(--amazon-orange);
+}
+
+.btn-add-cart:active {
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+}
+
+/* ============================================
+   MODAL DEL CARRITO
+   ============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    width: 95%;
+    max-width: 450px;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--amazon-text-light);
+}
+
+.close:hover {
+    color: var(--amazon-text);
+}
+
+.modal-content h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--amazon-text);
+}
+
+/* Items del carrito */
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--amazon-gray);
+}
+
+.cart-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--amazon-blue);
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: var(--amazon-text);
+}
+
+.cart-item-remove {
+    color: var(--amazon-blue);
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.cart-item-remove:hover {
+    color: var(--amazon-orange);
+    text-decoration: underline;
+}
+
+/* Total */
+.cart-total {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0;
+    border-top: 1px solid var(--amazon-gray);
+    margin-top: 10px;
+}
+
+.cart-total strong {
+    font-size: 18px;
+}
+
+/* Botón WhatsApp */
+.btn-whatsapp {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.btn-whatsapp:hover {
+    background: #1ea856;
+}
+
+/* ============================================
+   FOOTER TIPO AMAZON
+   ============================================ */
+footer {
+    background: var(--amazon-dark);
+    color: white;
+    margin-top: 30px;
+}
+
+.footer-top {
+    background: var(--amazon-light-dark);
+    padding: 15px;
+    text-align: center;
+}
+
+.footer-top a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer-top a:hover {
+    text-decoration: underline;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 10px;
+}
+
+.footer-column a {
+    color: var(--amazon-gray);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--amazon-gray);
+    padding: 30px;
+    text-align: center;
+}
+
+.footer-bottom .logo {
+    display: inline-block;
+    color: var(--amazon-gray);
+    margin-bottom: 20px;
+}
+
+.footer-bottom p {
+    color: var(--amazon-gray);
+    font-size: 12px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+    
+    .search-bar {
+        order: 3;
+        max-width: 100%;
+        margin: 10px 0;
+        flex: auto;
+    }
+    
+    .nav-right {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 5px;
+    }
+    
+    .nav-link .small {
+        display: none;
+    }
+    
+    .hero-content {
+        padding: 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 20px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   UTILIDADES
+   ============================================ */
+.text-amazon-blue {
+    color: var(--amazon-blue);
+}
+
+.text-amazon-orange {
+    color: var(--amazon-orange);
+}
+
+.text-amazon-green {
+    color: var(--amazon-green);
+}
+
+.text-amazon-red {
+    color: var(--amazon-red);
+}

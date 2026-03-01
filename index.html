@@ -3,145 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manualidades Yusy | Pilón, Granma</title>
+    <meta name="description" content="La mayor tienda online de productos en Pilón, Granma. Compra directamente a vendedores locales.">
+    <title>Shopping Pilón | Granma</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <!-- Navbar Superior Estilo Amazon -->
     <header>
         <nav class="navbar">
-            <!-- Logo -->
-            <div class="logo">
-                <i class="fas fa-crafts"></i>
-                Manualidades <span>Yusy</span>
+            <div class="logo" onclick="location.reload()">
+                <i class="fas fa-shopping-bag"></i> Shopping <span>Pilón</span>
             </div>
-            
-            <!-- Buscador -->
             <div class="search-bar">
-                <select>
-                    <option>Todo</option>
-                    <option>Manualidades</option>
-                    <option>Accesorios</option>
-                    <option>Bebé</option>
-                </select>
-                <input type="text" placeholder="Buscar productos...">
-                <button>
-                    <i class="fas fa-search"></i>
-                </button>
+                <input type="text" id="user-search" placeholder="¿Qué buscas en Pilón?" onkeyup="filtrarProductos()">
+                <button><i class="fas fa-search"></i></button>
             </div>
-            
-            <!-- Menú Derecho -->
             <div class="nav-right">
-                <a href="#contacto" class="nav-link">
-                    <span class="small">Atención al cliente</span>
-                    <span class="big">Contacto</span>
-                </a>
-                <a href="#inicio" class="nav-link">
-                    <span class="small">Hola, visita</span>
-                    <span class="big">Mi cuenta</span>
-                </a>
                 <div class="cart-icon" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
                 </div>
             </div>
         </nav>
-        
-        <!-- Navbar Inferior -->
-        <div class="navbar-bottom">
-            <a href="#inicio"><i class="fas fa-bars"></i> Todo</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="#contacto">Ofertas</a>
-            <a href="#contacto">Nuevos arrivals</a>
-            <a href="#contacto">Contacto</a>
-        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Arte hecho a mano desde Pilón</h1>
-            <p>Piezas exclusivas, tejidas y creadas con amor para momentos especiales.</p>
-            <a href="#catalogo" class="btn-primary">Ver Catálogo</a>
-        </div>
-    </section>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Compra y Vende en Pilón</h1>
+                <p>Tu mercado local, ahora digital.</p>
+                <a href="https://wa.me/5356195243?text=Hola,%20quiero%20publicar%20un%20producto" class="btn-primary">Publicar mi producto</a>
+            </div>
+        </section>
 
-    <!-- Catálogo de Productos -->
-    <main id="catalogo" class="container">
-        <h2 class="section-title">Nuestras Creaciones</h2>
         <div class="product-grid" id="product-list">
-            <!-- Los productos se cargan dinámicamente desde productos.js -->
-        </div>
+            </div>
     </main>
 
-    <!-- Modal del Carrito -->
     <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleCart()">&times;</span>
-            <h3>Tu Carrito de Compras</h3>
-            <div id="cart-items">
-                <!-- Los items del carrito se cargan dinámicamente -->
-            </div>
-            <div class="cart-total">
-                <strong>Total: $<span id="total-price">0</span> CUP</strong>
-            </div>
-            <button class="btn-whatsapp" onclick="checkoutWhatsApp()">
-                <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer Estilo Amazon -->
-    <footer>
-        <div class="footer-top">
-            <a href="#inicio">Volver al inicio</a>
-        </div>
-        
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>Conoce sobre Nosotros</h4>
-                <ul>
-                    <li><a href="#">Trabaja con nosotros</a></li>
-                    <li><a href="#">Acerca de Yusy</a></li>
-                    <li><a href="#">Nuestras artesanías</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Gana dinero con nosotros</h4>
-                <ul>
-                    <li><a href="#">Vende tus manualidades</a></li>
-                    <li><a href="#">Programa de afiliados</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>.payment</h4>
-                <ul>
-                    <li><a href="#">Métodos de pago</a></li>
-                    <li><a href="#">Cupones de descuento</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>¿Necesitas ayuda?</h4>
-                <ul>
-                    <li><a href="#">Centro de ayuda</a></li>
-                    <li><a href="#">Contactanos</a></li>
-                    <li><a href="#">Envíos a Pilón</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="logo">
-                Manualidades <span>Yusy</span>
-            </div>
-            <p>© 2024 Manualidades Yusy - Pilón, Granma, Cuba. Todos los derechos reservados.</p>
-            <p>Hecho con ❤️ artesanalmente</p>
-        </div>
-    </footer>
-    
-    <script src="js/productos.js"></script>
-    <script src="js/script.js"></script>
-</body>
-</html>

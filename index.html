@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La mayor tienda online de productos en Pilón, Granma. Compra directamente a vendedores locales.">
     <title>Shopping Pilón | Granma</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -32,12 +31,23 @@
             <div class="hero-content">
                 <h1>Compra y Vende en Pilón</h1>
                 <p>Tu mercado local, ahora digital.</p>
-                <a href="https://wa.me/5356195243?text=Hola,%20quiero%20publicar%20un%20producto" class="btn-primary">Publicar mi producto</a>
+                <a href="https://wa.me/5356195243?text=Hola, quiero publicar un producto" class="btn-primary">Publicar mi producto</a>
             </div>
         </section>
-
-        <div class="product-grid" id="product-list">
-            </div>
+        <div class="product-grid" id="product-list"></div>
     </main>
 
     <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Tu Carrito</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total"><strong>Total: $<span id="total-price">0</span></strong></div>
+            <button class="btn-checkout" onclick="checkout()">Finalizar por WhatsApp</button>
+        </div>
+    </div>
+
+    <script src="js/productos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

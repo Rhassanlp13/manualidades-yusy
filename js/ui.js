@@ -37,7 +37,7 @@ const UI = {
             const agotado = p.stock <= 0 || (enCarrito && enCarrito.cantidad >= p.stock);
             return `
             <article class="product-card" data-id="${p.id}">
-                <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"
+                <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" style="cursor:pointer"
                      onerror="this.src='https://placehold.co/400x210?text=Sin+imagen'">
                 <div class="product-info">
                     <span class="vendedor"><i class="fas fa-user-circle"></i> ${p.vendedor}</span>
@@ -110,24 +110,77 @@ const UI = {
     mostrarToast(msg, tipo = 'info') {
         const container = document.getElementById('toast-container');
         if (!container) return;
-
-        const tipos = { ok: '', warning: 'warning', error: 'error', info: 'info' };
-
+        const colores = { ok: '', warning: 'warning', error: 'error', info: 'info' };
         const toast = document.createElement('div');
-        toast.className = `toast-item ${tipos[tipo] || ''}`;
+        toast.className = `toast-item ${colores[tipo] || ''}`;
         toast.textContent = msg;
         container.appendChild(toast);
-
-    // Animar entrada
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => toast.classList.add('show'));
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => toast.classList.add('show'));
         });
-
-    // Animar salida y eliminar
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 350);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 350);
         }, 2200);
+    },
+
+    abrirDetalle(id) {
+        const p = this.productos.find(p => p.id === id);
+        if (!p) return;
+
+        const modal     = document.getElementById('modal-detalle');
+        const enCarrito = carrito.items.find(i => i.id === id);
+        const agotado   = p.stock <= 0 || (enCarrito && enCarrito.cantidad >= p.stock);
+
+        document.getElementById('detalle-img').src              = p.imagen;
+        document.getElementById('detalle-img').alt              = p.nombre;
+        document.getElementById('detalle-vendedor').textContent = p.vendedor;
+        document.getElementById('detalle-nombre').textContent   = p.nombre;
+        document.getElementById('detalle-precio').textContent   = p.precio.toLocaleString('es-CU');
+
+        const stockEl = document.getElementById('detalle-stock');
+        if (p.stock <= 0) {
+            stockEl.textContent = 'Agotado';
+            stockEl.className = 'detalle-stock agotado';
+        } else if (p.stock <= 3) {
+            stockEl.textContent = `¡Solo quedan ${p.stock}!`;
+            stockEl.className = 'detalle-stock low';
+        } else {
+            stockEl.textContent = `${p.stock} disponibles`;
+            stockEl.className = 'detalle-stock ok';
+        }
+
+        const btnAdd = document.getElementById('detalle-btn-add');
+        btnAdd.disabled = agotado;
+        btnAdd.innerHTML = agotado
+            ? '<i class="fas fa-times-circle"></i> Sin stock'
+            : '<i class="fas fa-cart-plus"></i> Añadir al carrito';
+
+        btnAdd.onclick = () => {
+            const resultado = carrito.agregar(id, this.productos);
+            if (resultado.ok) {
+                this.actualizarContador();
+                this.mostrarToast(`🛒 ${resultado.msg}`, 'ok');
+                this.renderProductos();
+                const enCarrito = carrito.items.find(i => i.id === id);
+                if (enCarrito && enCarrito.cantidad >= p.stock) {
+                    btnAdd.disabled = true;
+                    btnAdd.innerHTML = '<i class="fas fa-times-circle"></i> Sin stock';
+                    stockEl.textContent = 'Agotado';
+                    stockEl.className = 'detalle-stock agotado';
+                }
+            } else {
+                this.mostrarToast(`❌ ${resultado.msg}`, 'error');
+            }
+        };
+
+        modal.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+    },
+
+    cerrarDetalle() {
+        document.getElementById('modal-detalle').setAttribute('hidden', '');
+        document.body.style.overflow = '';
     },
 
     enviarWhatsApp() {
@@ -152,7 +205,10 @@ const UI = {
         });
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && !this.cartModal.hasAttribute('hidden')) this.cerrarModal();
+            if (e.key === 'Escape') {
+                if (!this.cartModal.hasAttribute('hidden')) this.cerrarModal();
+                if (!document.getElementById('modal-detalle').hasAttribute('hidden')) this.cerrarDetalle();
+            }
         });
 
         document.getElementById('btn-whatsapp')?.addEventListener('click', () => this.enviarWhatsApp());
@@ -169,7 +225,17 @@ const UI = {
             this.mostrarToast('🗑️ Carrito vaciado', 'info');
         });
 
+        // Añadir al carrito
         this.grid?.addEventListener('click', e => {
+            // Abrir detalle al tocar imagen
+            const img = e.target.closest('img');
+            if (img) {
+                const card = img.closest('.product-card');
+                if (card) this.abrirDetalle(card.dataset.id);
+                return;
+            }
+
+            // Añadir al carrito
             const btn = e.target.closest('.btn-add-cart');
             if (!btn || btn.disabled) return;
             const resultado = carrito.agregar(btn.dataset.id, this.productos);
@@ -179,14 +245,14 @@ const UI = {
                 const producto = this.productos.find(p => p.id === btn.dataset.id);
                 const enCarrito = carrito.items.find(i => i.id === btn.dataset.id);
                 if (producto && enCarrito && enCarrito.cantidad >= producto.stock) {
-                    btn.disabled = true;
-                    btn.innerHTML = '<i class="fas fa-times-circle"></i> Sin stock';
+                    this.renderProductos();
                 }
             } else {
                 this.mostrarToast(`❌ ${resultado.msg}`, 'error');
             }
         });
 
+        // +/- en el carrito
         this.cartItems?.addEventListener('click', e => {
             const btnA = e.target.closest('.btn-aumentar');
             const btnD = e.target.closest('.btn-disminuir');
@@ -205,6 +271,12 @@ const UI = {
                     this.mostrarToast('🛒 Carrito vacío', 'info');
                 }
             }
+        });
+
+        // Cerrar detalle
+        document.getElementById('detalle-btn-cerrar')?.addEventListener('click', () => this.cerrarDetalle());
+        document.getElementById('modal-detalle')?.addEventListener('click', e => {
+            if (e.target === document.getElementById('modal-detalle')) this.cerrarDetalle();
         });
     }
 };

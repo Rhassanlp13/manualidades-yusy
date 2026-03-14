@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender en Shopping Pilón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --accent: #ff9800;
+            --whatsapp: #25d366;
+            --danger: #e53935;
+            --bg: #f5f5f7;
+            --white: #ffffff;
+            --text: #1c1c2e;
+            --text-muted: #777;
+            --border: #e0e0e0;
+            --radius: 14px;
+            --transition: 0.25s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 16px rgba(26,35,126,0.25);
+        }
+
+        .logo {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .btn-back {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color var(--transition);
+        }
+
+        .btn-back:hover { color: var(--white); }
+
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .page-hero h1 em { color: var(--accent); font-style: normal; }
+        .page-hero p { opacity: 0.8; font-size: 1rem; position: relative; }
+
+        .gratis-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .form-container {
+            max-width: 620px;
+            margin: 0 auto 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .form-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            border: 1px solid #ebebf0;
+        }
+
+        .form-section { margin-bottom: 1.8rem; }
+
+        .form-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-section-title i { color: var(--accent); font-size: 0.9rem; }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .req { color: var(--danger); margin-left: 2px; }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            color: var(--text);
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26,35,126,0.08);
+            background: var(--white);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 80px; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+        .img-preview-box {
+            width: 100%;
+            height: 160px;
+            border-radius: 10px;
+            border: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            overflow: hidden;
+            margin-top: 8px;
+            background: var(--bg);
+        }
+
+        .img-preview-box img { width: 100%; height: 100%; object-fit: cover; }
+        .img-preview-box.has-img { border-style: solid; border-color: var(--primary); }
+
+        .info-box {
+            background: #e8eaf6;
+            border-left: 3px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .info-box i { margin-top: 2px; flex-shrink: 0; }
+
+        .btn-enviar {
+            width: 100%;
+            background: var(--whatsapp);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+            margin-top: 0.5rem;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37,211,102,0.4);
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        .field-error {
+            font-size: 0.78rem;
+            color: var(--danger);
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea { border-color: var(--danger); }
+        .form-group.error .field-error { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">SHOPPING <span>PILÓN</span></a>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Volver a la tienda
+        </a>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Vende en <em>Pilón</em></h1>
+        <p>Llega a más clientes sin moverte de casa</p>
+        <div class="gratis-badge">
+            <i class="fas fa-gift"></i> 100% gratis por tiempo limitado
+        </div>
+    </div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <span>Rellena el formulario</span>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <span>Nos llega por WhatsApp</span>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <span>Lo publicamos en 24h</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-card">
+
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <span>Al enviar, recibiremos tus datos por WhatsApp y publicaremos tu producto en menos de 24 horas.</span>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title">
+                    <i class="fas fa-user"></i> Tus datos
+                </div>
+                <div class="form-row">
+                    <div class="form-group" id="g-nombre-vendedor">
+                        <label>Tu nombre <span class="req">*</span></label>
+                        <input type="text" id="nombre-vendedor" placeholder="Ej: María López">
+                        <div class="field-error">Este campo es obligatorio</div>
+                    </div>
+                    <div class="form-group" id="g-telefono">
+                        <label>Tu teléfono <span class="req">*</span></label>
+                        <input type="tel" id="telefono" placeholder="Ej: 53561234">
+                        <div class="field-error">Este campo es obligatorio</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title">
+                    <i class="fas fa-box"></i> Tu producto
+                </div>
+                <div class="form-group" id="g-nombre-producto">
+                    <label>Nombre del producto <span class="req">*</span></label>
+                    <input type="text" id="nombre-producto" placeholder="Ej: Cintillo con lazo rosa">
+                    <div class="field-error">Este campo es obligatorio</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" id="g-precio">
+                        <label>Precio en CUP <span class="req">*</span></label>
+                        <input type="number" id="precio" placeholder="Ej: 150" min="1">
+                        <div class="field-error">Ingresa un precio válido</div>
+                    </div>
+                    <div class="form-group" id="g-stock">
+                        <label>Cantidad disponible <span class="req">*</span></label>
+                        <input type="number" id="stock" placeholder="Ej: 10" min="1">
+                        <div class="field-error">Ingresa la cantidad</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descripción (opcional)</label>
+                    <textarea id="descripcion" placeholder="Describe tu producto, materiales, colores disponibles..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title">
+                    <i class="fas fa-camera"></i> Foto del producto
+                </div>
+                <div class="form-group" id="g-imagen">
+                    <label>Link de la imagen <span class="req">*</span></label>
+                    <input type="url" id="imagen" placeholder="https://...">
+                    <div class="field-error">Ingresa un link de imagen válido</div>
+                </div>
+                <div class="img-preview-box" id="img-preview">
+                    <span><i class="fas fa-image" style="margin-right:6px"></i> Vista previa de la foto</span>
+                </div>
+                <p style="font-size:0.78rem; color:var(--text-muted); margin-top:8px;">
+                    <i class="fas fa-lightbulb" style="color:var(--accent)"></i>
+                    Sube tu foto gratis en <a href="https://postimages.org" target="_blank" style="color:var(--primary)">postimages.org</a> y pega el link aquí.
+                </p>
+            </div>
+
+            <button class="btn-enviar" id="btn-enviar">
+                <i class="fab fa-whatsapp"></i> Enviar solicitud por WhatsApp
+            </button>
+
+            <p class="form-note">
+                <i class="fas fa-lock" style="color:var(--accent)"></i>
+                Tus datos solo se usan para publicar tu producto.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('imagen').addEventListener('input', function () {
+            const preview = document.getElementById('img-preview');
+            const url = this.value.trim();
+            if (url) {
+                preview.classList.add('has-img');
+                preview.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<span style=\\'color:#e53935\\'><i class=\\'fas fa-exclamation-triangle\\'></i> Link inválido</span>'; this.parentElement.classList.remove('has-img')">`;
+            } else {
+                preview.classList.remove('has-img');
+                preview.innerHTML = '<span><i class="fas fa-image" style="margin-right:6px"></i> Vista previa de la foto</span>';
+            }
+        });
+
+        function validar() {
+            const campos = [
+                { id: 'nombre-vendedor', grupo: 'g-nombre-vendedor', check: v => v.trim() !== '' },
+                { id: 'telefono',        grupo: 'g-telefono',        check: v => v.trim() !== '' },
+                { id: 'nombre-producto', grupo: 'g-nombre-producto', check: v => v.trim() !== '' },
+                { id: 'precio',          grupo: 'g-precio',          check: v => v > 0 },
+                { id: 'stock',           grupo: 'g-stock',           check: v => v > 0 },
+                { id: 'imagen',          grupo: 'g-imagen',          check: v => v.trim().startsWith('http') },
+            ];
+            let valido = true;
+            campos.forEach(({ id, grupo, check }) => {
+                const input = document.getElementById(id);
+                const grupoEl = document.getElementById(grupo);
+                if (!check(input.value)) {
+                    grupoEl.classList.add('error');
+                    valido = false;
+                } else {
+                    grupoEl.classList.remove('error');
+                }
+            });
+            return valido;
+        }
+
+        document.getElementById('btn-enviar').addEventListener('click', () => {
+            if (!validar()) return;
+
+            const nombreVendedor = document.getElementById('nombre-vendedor').value.trim();
+            const telefono       = document.getElementById('telefono').value.trim();
+            const nombreProducto = document.getElementById('nombre-producto').value.trim();
+            const precio         = document.getElementById('precio').value;
+            const stock          = document.getElementById('stock').value;
+            const descripcion    = document.getElementById('descripcion').value.trim();
+            const imagen         = document.getElementById('imagen').value.trim();
+
+            let texto = `🛍️ *Nueva solicitud de vendedor — Shopping Pilón*\n\n`;
+            texto += `👤 *Vendedor:* ${nombreVendedor}\n`;
+            texto += `📞 *Teléfono:* ${telefono}\n\n`;
+            texto += `📦 *Producto:* ${nombreProducto}\n`;
+            texto += `💰 *Precio:* $${parseInt(precio).toLocaleString('es-CU')} CUP\n`;
+            texto += `📊 *Stock:* ${stock} unidades\n`;
+            if (descripcion) texto += `📝 *Descripción:* ${descripcion}\n`;
+            texto += `🖼️ *Imagen:* ${imagen}\n\n`;
+            texto += `_Enviado desde el formulario de Shopping Pilón_`;
+
+            window.open(`https://wa.me/5356195243?text=${encodeURIComponent(texto)}`, '_blank');
+        });
+
+        document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                input.closest('.form-group')?.classList.remove('error');
+            });
+        });
+    </script>
+</body>
+</html>
+
+

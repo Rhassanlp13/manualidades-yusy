@@ -201,8 +201,7 @@ body {
     font-weight: 600;
     color: var(--text);
     margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    display: -webkit-box; 
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

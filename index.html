@@ -8,13 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>"> 
 </head>
-
 <body>
 
     <header class="navbar">
-        <div class="logo">SHOPPING <span>PILON</span></div>
+        <div class="logo">SHOPPING <span>PILÓN</span></div>
         <button class="cart-btn" id="cart-btn" aria-label="Ver carrito">
             <i class="fas fa-shopping-bag"></i>
             <span class="cart-badge" id="cart-count">0</span>
@@ -24,7 +22,7 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-subtitle">Bienvenido a</p>
-            <h1>Tienda Online<br>en <em>Pilón</em></h1>
+            <h1>Tu Mercado<br>en <em>Pilón</em></h1>
             <p class="hero-desc">Directo del vendedor a tu casa.</p>
             <a href="vender.html" class="btn-primary">
                 <i class="fas fa-store"></i> Quiero vender aquí
@@ -34,13 +32,14 @@
 
     <section class="section-title">
         <h2>Productos disponibles</h2>
-        <p>Selecciona lo que quieres y confirma tu pedido por WhatsApp</p>
+        <p>Toca un producto para ver los detalles</p>
     </section>
 
     <main class="product-grid" id="grid" aria-label="Catálogo de productos"></main>
 
     <div id="toast-container"></div>
 
+    <!-- Modal carrito -->
     <div id="cart-modal" class="modal-overlay" role="dialog" aria-modal="true" hidden>
         <div class="modal-box">
             <div class="modal-header">
@@ -65,7 +64,59 @@
         </div>
     </div>
 
-    
+    <!-- Modal detalle producto -->
+    <div id="modal-detalle" class="modal-overlay" hidden>
+        <div class="detalle-box">
+            <button class="detalle-btn-cerrar" id="detalle-btn-cerrar">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="detalle-img-wrap">
+                <img id="detalle-img" src="" alt="">
+            </div>
+            <div class="detalle-scroll">
+                <div class="detalle-info">
+                    <div class="detalle-vendedor">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="detalle-vendedor"></span>
+                    </div>
+                    <div class="detalle-nombre" id="detalle-nombre"></div>
+                    <div class="detalle-precio">$<span id="detalle-precio"></span> CUP</div>
+                    <span class="detalle-stock" id="detalle-stock"></span>
+                </div>
+
+                <div class="detalle-actions">
+                    <button class="detalle-btn-add" id="detalle-btn-add">
+                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                    </button>
+                </div>
+
+                <!-- Reseñas -->
+                <div class="resenas-section">
+                    <h3 class="resenas-titulo">
+                        <i class="fas fa-star"></i> Reseñas
+                        <span class="resenas-count" id="resenas-count"></span>
+                    </h3>
+
+                    <div class="resena-form">
+                        <input type="text" id="resena-nombre" placeholder="Tu nombre" maxlength="30">
+                        <div class="estrellas-input" id="estrellas-input">
+                            <i class="fas fa-star" data-val="1"></i>
+                            <i class="fas fa-star" data-val="2"></i>
+                            <i class="fas fa-star" data-val="3"></i>
+                            <i class="fas fa-star" data-val="4"></i>
+                            <i class="fas fa-star" data-val="5"></i>
+                        </div>
+                        <textarea id="resena-texto" placeholder="Escribe tu opinión..." maxlength="200" rows="3"></textarea>
+                        <button class="btn-enviar-resena" id="btn-enviar-resena">
+                            <i class="fas fa-paper-plane"></i> Publicar reseña
+                        </button>
+                    </div>
+
+                    <div id="resenas-lista"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/carrito.js"></script>
     <script src="js/ui.js"></script>
